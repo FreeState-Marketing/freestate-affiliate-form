@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FreeState Affiliate Sign-Up</title>
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #2e7d32;
+    }
+    input, textarea, button {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1b5e20;
+    }
+  </style>
+</head>
+<body>
+  <h1>Affiliate Sign-Up</h1>
+  <form id="affiliateForm">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="url" id="website" placeholder="Website">
+    <input type="text" id="referral_source" placeholder="Referral Source">
+    <textarea id="notes" placeholder="Notes"></textarea>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    // 🔧 Firebase config for FreeState Marketing 101
+    const firebaseConfig = {
+      apiKey: "AIzaSyDgUeJvGvZpKZJZ8xU6QvXxU6ZpKZJZ8xU",
+      authDomain: "freestate-marketing-101.firebaseapp.com",
+      projectId: "freestate-marketing-101",
+      storageBucket: "freestate-marketing-101.appspot.com",
+      messagingSenderId: "123456789012",
+      appId: "1:123456789012:web:abcdef1234567890abcdef"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // 🔐 Anonymous sign-in
+    firebase.auth().signInAnonymously().catch((error) => {
+      console.error("Authentication error:", error);
+    });
+
+    // 📝 Form submission logic
+    document.getElementById("affiliateForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const formData = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        website: document.getElementById("website").value,
+        referral_source: document.getElementById("referral_source").value,
+        status: "pending",
+        notes: document.getElementById("notes").value,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      };
+
+      db.collection("affiliates").add(formData)
+        .then(() => {
+          alert("Submission successful!");
+          document.getElementById("affiliateForm").reset();
+        })
+        .catch((error) => {
+          console.error("Firestore error:", error);
+          alert("Submission failed. Check console for details.");
+        });
+    });
+  </script>
+</body>
+</html>
