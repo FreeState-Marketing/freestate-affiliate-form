@@ -58,12 +58,14 @@
       appId: "1:123456789012:web:abcdef1234567890abcdef"
     };
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+    // ✅ Initialize Firebase and Firestore
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore(app);
 
     // 🔐 Anonymous sign-in
     firebase.auth().signInAnonymously().catch((error) => {
       console.error("Authentication error:", error);
+      alert("Authentication failed. Please try again later.");
     });
 
     // 📝 Form submission logic
@@ -81,7 +83,8 @@
       };
 
       db.collection("affiliates").add(formData)
-        .then(() => {
+        .then((docRef) => {
+          console.log("Document written with ID:", docRef.id);
           alert("Submission successful!");
           document.getElementById("affiliateForm").reset();
         })
