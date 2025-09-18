@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>FreeState Affiliate Sign-Up</title>
-  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js"></script>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -40,15 +38,18 @@
   <h1>Affiliate Sign-Up</h1>
   <form id="affiliateForm">
     <input type="text" id="name" placeholder="Name" required>
-    <input type="email" id="email" placeholder="Email" required>
+    <input type="email" id="email" placeholder="Email" required pattern="[^@]+@[^@]+\.[^@]+">
     <input type="url" id="website" placeholder="Website">
     <input type="text" id="referral_source" placeholder="Referral Source">
     <textarea id="notes" placeholder="Notes"></textarea>
     <button type="submit">Submit</button>
   </form>
 
-  <script>
-    // 🔧 Firebase config for FreeState Marketing 101
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+
     const firebaseConfig = {
       apiKey: "AIzaSyDgUeJvGvZpKZJZ8xU6QvXxU6ZpKZJZ8xU",
       authDomain: "freestate-marketing-101.firebaseapp.com",
@@ -58,18 +59,16 @@
       appId: "1:123456789012:web:abcdef1234567890abcdef"
     };
 
-    // ✅ Initialize Firebase and Firestore
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
 
-    // 🔐 Anonymous sign-in
-    firebase.auth().signInAnonymously().catch((error) => {
+    signInAnonymously(auth).catch((error) => {
       console.error("Authentication error:", error);
       alert("Authentication failed. Please try again later.");
     });
 
-    // 📝 Form submission logic
-    document.getElementById("affiliateForm").addEventListener("submit", function(e) {
+    document.getElementById("affiliateForm").addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const formData = {
@@ -79,19 +78,17 @@
         referral_source: document.getElementById("referral_source").value,
         status: "pending",
         notes: document.getElementById("notes").value,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        timestamp: serverTimestamp()
       };
 
-      db.collection("affiliates").add(formData)
-        .then((docRef) => {
-          console.log("Document written with ID:", docRef.id);
-          alert("Submission successful!");
-          document.getElementById("affiliateForm").reset();
-        })
-        .catch((error) => {
-          console.error("Firestore error:", error);
-          alert("Submission failed. Check console for details.");
-        });
+      try {
+        const docRef = await addDoc(collection(db, "affiliates"), formData);
+        console.log("Document written with ID:", docRef.id);
+        window.location.href = "thank-you.html";
+      } catch (error) {
+        console.error("Firestore error:", error);
+        alert("Submission failed. Check console for details.");
+      }
     });
   </script>
 </body>
