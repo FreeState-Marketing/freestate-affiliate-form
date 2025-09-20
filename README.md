@@ -53,6 +53,24 @@ To deploy manually:
 ## 🤝 Contributing
 This project is built for resilience and repeatability. If you're passionate about grassroots tech, modular systems, or community empowerment, we welcome your input. Fork the repo, submit PRs, or reach out via FreeState channels.
 
+## ❓ FAQ
+
+**Q: How do I test the form locally?**  
+A: Open `index.html` in your browser. No server required.
+
+**Q: Where does the data go?**  
+A: Firestore → `affiliates` collection. You can view it in Firebase Console.
+
+**Q: Can I customize the fields?**  
+A: Yes. Edit `index.html` and `main.js` to match your data needs.
+
+**Q: Can I use this for other FreeState modules?**  
+A: Absolutely. This form is modular and repeatable by design.
+
+**Q: Is this production-ready?**  
+A: It’s a blueprint—robust, scalable, and open-source. You can extend it with validation, email triggers, and admin dashboards.
+
+
 ## 🖼️ Screenshots
 
 ### Affiliate Sign-Up Form
