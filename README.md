@@ -37,5 +37,14 @@ To deploy manually:
 ## 🤝 Contributing
 This project is built for resilience and repeatability. If you're passionate about grassroots tech, modular systems, or community empowerment, we welcome your input. Fork the repo, submit PRs, or reach out via FreeState channels.
 
+## 🖼️ Screenshots
+
+### Affiliate Sign-Up Form
+![Affiliate Form](screenshots/form.png)
+
+### Confirmation Page
+![Thank You](screenshots/thank_you.png)
+
+
 ---
 
