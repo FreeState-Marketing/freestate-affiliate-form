@@ -1,5 +1,7 @@
 # FreeState Affiliate Form
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3e6e3e4e-6b2e-4b7f-9b8e-5c8b3e9e6c3f/deploy-status)](https://app.netlify.com/sites/freestate-affiliate-form/deploys)
+
 A zero-budget, open-source affiliate sign-up form for FreeState Marketing 101. Built with HTML and Firebase, deployed via Netlify. This form helps us onboard partners who align with our mission of empowerment, wellness, and sustainable systems.
 
 ## 🔧 Tech Stack
