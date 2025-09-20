@@ -4,6 +4,19 @@
 
 A zero-budget, open-source affiliate sign-up form for FreeState Marketing 101. Built with HTML and Firebase, deployed via Netlify. This form helps us onboard partners who align with our mission of empowerment, wellness, and sustainable systems.
 
+## 🧠 Philosophy
+
+FreeState isn’t just a brand—it’s a blueprint for resilience.
+
+We build modular systems that empower individuals, not institutions. Every tool we release is designed to be:
+- **Repeatable** – so others can build without reinventing the wheel  
+- **Zero-budget** – because innovation shouldn’t depend on funding  
+- **Open-source** – so knowledge flows freely and communities grow stronger  
+- **Human-centered** – built for real people solving real problems
+
+This affiliate form is more than a signup—it’s an invitation to join a movement rooted in wellness, sustainability, and self-sufficiency. If you believe in grassroots tech, clear documentation, and systems that scale without selling out, you’re in the right place.
+
+
 ## 🔧 Tech Stack
 - HTML5 + Vanilla JS
 - Firebase (Anonymous Auth + Firestore)
