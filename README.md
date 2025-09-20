@@ -61,6 +61,22 @@ This project is built for resilience and repeatability. If you're passionate abo
 ### Confirmation Page
 ![Thank You](screenshots/thank_you.png)
 
+## 📅 Changelog
+
+### v1.0.0 – Initial Launch
+- Firestore integration
+- Anonymous auth
+- Redirect logic
+- Screenshots added
+- Philosophy section added
+- Badge wall added to README
+
+### v1.1.0 – Planned
+- Form validation (client-side)
+- CSV export for affiliate data
+- Cloud Function triggers for onboarding
+- Admin dashboard for affiliate status
+
 
 ---
 
