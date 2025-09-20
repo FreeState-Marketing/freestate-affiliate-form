@@ -10,9 +10,16 @@ A zero-budget, open-source affiliate sign-up form for FreeState Marketing 101. B
 - Netlify (Static Hosting)
 
 ## 🚀 Features
+
 - Collects affiliate info: name, email, website, referral source, notes
 - Submits data to Firestore with server timestamp
-- Modular structure for future automation (onboarding flows, CSV exports, Cloud Functions)
+- Anonymous authentication (no login required)
+- Redirects to a thank-you page on success
+- Modular structure for future automation:
+  - Onboarding flows
+  - CSV exports
+  - Cloud Functions
+
 
 ## 📦 Deployment
 Live site: _[Netlify URL goes here]_  
