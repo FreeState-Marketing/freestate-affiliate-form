@@ -6,36 +6,51 @@
     <title>FreeState Affiliate Sign-Up</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/zod@3.22.2/lib/index.umd.min.js"></script>
-    <style>
-      .error {
-        color: red;
-        font-size: 0.875rem;
-        margin-top: 4px;
-      }
-    </style>
   </head>
-  <body>
-    <div class="card">
-      <h1>Affiliate Sign-Up</h1>
-      <form id="affiliateForm">
-        <input type="text" id="name" placeholder="Name" required />
-        <div id="error-name" class="error"></div>
+  <body class="bg-gray-50 font-sans text-gray-900">
+    <div class="max-w-xl mx-auto mt-12 p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+      <h1 class="text-2xl font-semibold mb-6 text-center text-gray-800">Affiliate Sign-Up</h1>
+      <form id="affiliateForm" class="space-y-4">
+        <div>
+          <input type="text" id="name" placeholder="Name"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <div id="error-name" class="text-red-500 text-sm mt-1"></div>
+        </div>
 
-        <input type="email" id="email" placeholder="Email" required />
-        <div id="error-email" class="error"></div>
+        <div>
+          <input type="email" id="email" placeholder="Email"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <div id="error-email" class="text-red-500 text-sm mt-1"></div>
+        </div>
 
-        <input type="url" id="website" placeholder="Website" />
-        <div id="error-website" class="error"></div>
+        <div>
+          <input type="url" id="website" placeholder="Website"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <div id="error-website" class="text-red-500 text-sm mt-1"></div>
+        </div>
 
-        <input type="text" id="referral_source" placeholder="Referral Source" />
-        <div id="error-referral_source" class="error"></div>
+        <div>
+          <input type="text" id="referral_source" placeholder="Referral Source"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          <div id="error-referral_source" class="text-red-500 text-sm mt-1"></div>
+        </div>
 
-        <textarea id="notes" placeholder="Notes"></textarea>
-        <div id="error-notes" class="error"></div>
+        <div>
+          <textarea id="notes" placeholder="Notes"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+          <div id="error-notes" class="text-red-500 text-sm mt-1"></div>
+        </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit"
+          class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200">
+          Submit
+        </button>
       </form>
+      <p class="text-center text-sm text-gray-500 mt-6">
+        Powered by FreeState Marketing · Built for truth without gatekeepers
+      </p>
     </div>
 
     <script type="module">
@@ -65,7 +80,6 @@
       document.getElementById("affiliateForm").addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        // Clear previous errors
         ["name", "email", "website", "referral_source", "notes"].forEach(id => {
           document.getElementById(`error-${id}`).textContent = '';
         });
