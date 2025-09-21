@@ -48,7 +48,14 @@
           Submit
         </button>
       </form>
-      <p class="text-center text-sm text-gray-500 mt-6">
+
+      <!-- Honest Social Proof -->
+      <div class="mt-4 text-center text-sm text-gray-500">
+        Built for truth, transparency, and community—FreeState Marketing empowers independent voices.
+      </div>
+      <p id="testimonial" class="text-sm text-gray-600 italic text-center mt-2"></p>
+
+      <p class="text-center text-sm text-gray-400 mt-6">
         Powered by FreeState Marketing · Built for truth without gatekeepers
       </p>
     </div>
@@ -122,6 +129,19 @@
           alert("Submission failed. Check console for details.");
         }
       });
+
+      // Rotating Testimonials
+      const testimonials = [
+        "“FreeState gave me the tools to launch my own truth-based brand.”",
+        "“I joined because I believe in what FreeState stands for.”",
+        "“No gatekeepers. Just clarity, community, and real support.”"
+      ];
+
+      let index = 0;
+      setInterval(() => {
+        document.getElementById("testimonial").textContent = testimonials[index];
+        index = (index + 1) % testimonials.length;
+      }, 5000);
     </script>
   </body>
 </html>
