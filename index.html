@@ -1,122 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FreeState Affiliate Sign-Up</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/zod@3.22.2/lib/index.umd.min.js"></script>
- <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(to right, #e8f5e9, #f1f8e9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
-    .card {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-      max-width: 500px;
-      width: 100%;
-    }
-    h1 {
-      color: #2e7d32;
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-    input, textarea, button {
-      width: 100%;
-      margin-bottom: 1rem;
-      padding: 0.75rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      transition: border-color 0.3s;
-    }
-    input:focus, textarea:focus {
-      border-color: #2e7d32;
-      outline: none;
-    }
-    button {
-      background-color: #2e7d32;
-      color: white;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    button:hover {
-      background-color: #1b5e20;
-    }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <h1>Affiliate Sign-Up</h1>
-    <form id="affiliateForm">
-      <input type="text" id="name" placeholder="Name" required />
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="url" id="website" placeholder="Website" />
-      <input type="text" id="referral_source" placeholder="Referral Source" />
-      <textarea id="notes" placeholder="Notes"></textarea>
-      <button type="submit">Submit</button>
-    </form>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FreeState Affiliate Sign-Up</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/zod@3.22.2/lib/index.umd.min.js"></script>
+    <style>
+      .error {
+        color: red;
+        font-size: 0.875rem;
+        margin-top: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Affiliate Sign-Up</h1>
+      <form id="affiliateForm">
+        <input type="text" id="name" placeholder="Name" required />
+        <div id="error-name" class="error"></div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
-    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+        <input type="email" id="email" placeholder="Email" required />
+        <div id="error-email" class="error"></div>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCSPtKSopVsjA-n8lK6JRoTmh97E18cHbw",
-      authDomain: "freestate-marketing-101.firebaseapp.com",
-      projectId: "freestate-marketing-101",
-      storageBucket: "freestate-marketing-101.appspot.com",
-      messagingSenderId: "268354486200",
-      appId: "1:268354486200:web:89104e650644d2fec5d94d",
-      measurementId: "G-0WMP6G2SVY"
-    };
+        <input type="url" id="website" placeholder="Website" />
+        <div id="error-website" class="error"></div>
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const auth = getAuth(app);
+        <input type="text" id="referral_source" placeholder="Referral Source" />
+        <div id="error-referral_source" class="error"></div>
 
-    signInAnonymously(auth).catch((error) => {
-      console.error("Authentication error:", error);
-      alert("Authentication failed. Please try again later.");
-    });
+        <textarea id="notes" placeholder="Notes"></textarea>
+        <div id="error-notes" class="error"></div>
 
-    document.getElementById("affiliateForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
+        <button type="submit">Submit</button>
+      </form>
+    </div>
 
-      const formData = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        website: document.getElementById("website").value,
-        referral_source: document.getElementById("referral_source").value,
-        status: "pending",
-        notes: document.getElementById("notes").value,
-        timestamp: serverTimestamp()
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+      import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+      import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyCSPtKSopVsjA-n8lK6JRoTmh97E18cHbw",
+        authDomain: "freestate-marketing-101.firebaseapp.com",
+        projectId: "freestate-marketing-101",
+        storageBucket: "freestate-marketing-101.appspot.com",
+        messagingSenderId: "268354486200",
+        appId: "1:268354486200:web:89104e650644d2fec5d94d",
+        measurementId: "G-0WMP6G2SVY"
       };
 
-      try {
-        const docRef = await addDoc(collection(db, "affiliates"), formData);
-        console.log("Document written with ID:", docRef.id);
-        window.location.href = "thank-you.html";
-      } catch (error) {
-        console.error("Firestore error:", error);
-        alert("Submission failed. Check console for details.");
-      }
-    });
-  </script>
-</body>
-</html>
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const auth = getAuth(app);
 
+      signInAnonymously(auth).catch((error) => {
+        console.error("Authentication error:", error);
+        alert("Authentication failed. Please try again later.");
+      });
+
+      document.getElementById("affiliateForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // Clear previous errors
+        ["name", "email", "website", "referral_source", "notes"].forEach(id => {
+          document.getElementById(`error-${id}`).textContent = '';
+        });
+
+        const { z } = window;
+        const affiliateSchema = z.object({
+          name: z.string().min(1, 'Name is required'),
+          email: z.string().email('Invalid email'),
+          website: z.string().url('Invalid website').optional(),
+          referral_source: z.string().optional(),
+          notes: z.string().max(500, 'Notes too long').optional(),
+        });
+
+        const formData = {
+          name: document.getElementById("name").value.trim(),
+          email: document.getElementById("email").value.trim(),
+          website: document.getElementById("website").value.trim(),
+          referral_source: document.getElementById("referral_source").value.trim(),
+          notes: document.getElementById("notes").value.trim(),
+          status: "pending",
+          timestamp: serverTimestamp()
+        };
+
+        const result = affiliateSchema.safeParse(formData);
+
+        if (!result.success) {
+          const errors = result.error.flatten().fieldErrors;
+          for (const key in errors) {
+            document.getElementById(`error-${key}`).textContent = errors[key][0];
+          }
+          return;
+        }
+
+        try {
+          const docRef = await addDoc(collection(db, "affiliates"), formData);
+          console.log("Document written with ID:", docRef.id);
+          window.location.href = "thank-you.html";
+        } catch (error) {
+          console.error("Firestore error:", error);
+          alert("Submission failed. Check console for details.");
+        }
+      });
+    </script>
+  </body>
+</html>
