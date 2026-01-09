@@ -6,6 +6,7 @@ A modular backend system for Google Sheets integration and AI-powered page analy
 
 import os
 import sys
+import time
 from datetime import datetime
 from typing import Dict, Any, Optional
 import json
@@ -89,7 +90,6 @@ class TitanOS:
         """Scan and sync environmental data."""
         self.log("Scanning Environment...")
         # Simulate environment scanning
-        import time
         time.sleep(2)
         self.log("Environmental Data Synced.")
     
@@ -130,7 +130,6 @@ class TitanOS:
         self.authenticate_user()
         
         # Wait a bit before AI task (simulating the 1 minute delay in logs)
-        import time
         time.sleep(1)
         
         # This should fail if API key is not set
