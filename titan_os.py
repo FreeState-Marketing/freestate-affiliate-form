@@ -18,6 +18,10 @@ try:
 except ImportError:
     DOTENV_AVAILABLE = False
 
+# Configuration constants
+CENTISECONDS_PER_SECOND = 100
+AI_TASK_DELAY_SECONDS = 1  # Simulated delay before AI task execution
+
 
 class CommandRegistry:
     """Registry for managing system commands."""
@@ -79,12 +83,17 @@ class TitanOS:
         self.authenticated = False
         self.start_time = datetime.now()
     
+    def _format_timestamp(self, elapsed: float) -> str:
+        """Format elapsed time as [MM:SS:CC] timestamp."""
+        minutes = int(elapsed // 60)
+        seconds = int(elapsed % 60)
+        centiseconds = int((elapsed % 1) * CENTISECONDS_PER_SECOND)
+        return f"[{minutes:02d}:{seconds:02d}:{centiseconds:02d}]"
+    
     def log(self, message: str):
         """Log a message with timestamp."""
         elapsed = (datetime.now() - self.start_time).total_seconds()
-        minutes = int(elapsed // 60)
-        seconds = int(elapsed % 60)
-        timestamp = f"[{minutes:02d}:{seconds:02d}:{int((elapsed % 1) * 100):02d}]"
+        timestamp = self._format_timestamp(elapsed)
         print(f"{timestamp} {message}")
     
     def bootstrap(self):
@@ -137,7 +146,7 @@ class TitanOS:
         self.authenticate_user()
         
         # Wait a bit before AI task (simulating the 1 minute delay in logs)
-        time.sleep(1)
+        time.sleep(AI_TASK_DELAY_SECONDS)
         
         # This should fail if API key is not set
         result = self.ai_task("How can we improve this page?")
