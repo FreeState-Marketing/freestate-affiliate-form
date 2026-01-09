@@ -11,6 +11,13 @@ from datetime import datetime
 from typing import Dict, Any, Optional
 import json
 
+# Optional dependency for .env file support
+try:
+    from dotenv import load_dotenv
+    DOTENV_AVAILABLE = True
+except ImportError:
+    DOTENV_AVAILABLE = False
+
 
 class CommandRegistry:
     """Registry for managing system commands."""
@@ -140,10 +147,9 @@ class TitanOS:
 def main():
     """Main entry point."""
     # Check if .env file exists and load it
-    try:
-        from dotenv import load_dotenv
+    if DOTENV_AVAILABLE:
         load_dotenv()
-    except ImportError:
+    else:
         print("Warning: python-dotenv not installed. Environment variables must be set manually.")
     
     titan = TitanOS()
