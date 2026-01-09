@@ -8,8 +8,7 @@ import os
 import sys
 import time
 from datetime import datetime
-from typing import Dict, Any, Optional
-import json
+from typing import Dict, Any
 
 # Optional dependency for .env file support
 try:
